@@ -1,0 +1,21 @@
+{
+  "name": "manager",
+  "version": "1.0.0",
+  "description": "a simple manager",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "express",
+    "futbol"
+  ],
+  "author": "Anurag Samdariya",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.1",
+    "nodemon": "^3.1.7"
+  }
+}
