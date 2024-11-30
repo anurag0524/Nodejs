@@ -1,7 +1,25 @@
 import express from 'express';
+import logger from "./logger.js";
+import morgan from "morgan";
 
 const app = express()
 const port = 3000
+
+const morganFormat = ":method :url :status :response-time ms";
+
+app.use(morgan(morganFormat, {
+      stream: {
+        write: (message) => {
+          const logObject = {
+            method: message.split(" ")[0],
+            url: message.split(" ")[1],
+            status: message.split(" ")[2],
+            responseTime: message.split(" ")[3],
+          };
+          logger.info(JSON.stringify(logObject));
+        },
+      },
+    }));
 
 // app.get("/",(req, res) =>{
 //     res.send("Hello from Anurag")
@@ -22,6 +40,7 @@ let nextId = 1
 
 // add a new tea
 app.post('/teas',(req, res) =>{
+    logger.info("A post request was made to add a new tea")
     const {name, price} = req.body
     const newTea = {id: nextId++, name, price}
     teaData.push(newTea)
